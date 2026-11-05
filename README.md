@@ -57,7 +57,7 @@ Users can view their previous prediction records.
 Installation and Execution
 
 1.Clone the repository:
-git clone https://github.com/YOUR-USERNAME/Student-Performance-Prediction.git
+git clone https://github.com/pavanipriyapoluparthi/Student-Performance-Prediction.git
 
 2.Open the project folder:
 cd Student-Performance-Prediction
