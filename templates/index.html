@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Student Performance Prediction</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f6ff;
+            color: #333;
+        }
+
+        /* Navbar */
+
+        .navbar {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 18px 45px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+        }
+
+        .navbar h2 {
+            margin: 0;
+            font-size: 22px;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .nav-button {
+            background: white;
+            color: #667eea;
+            padding: 9px 16px;
+            border-radius: 7px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .nav-button:hover {
+            background: #f0f0ff;
+        }
+
+        /* Main container */
+
+        .container {
+            max-width: 950px;
+            margin: 45px auto;
+            padding: 20px;
+        }
+
+        .heading {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .heading h1 {
+            font-size: 34px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .heading p {
+            color: #777;
+            font-size: 16px;
+        }
+
+        /* Prediction card */
+
+        .card {
+            background: white;
+            padding: 35px;
+            border-radius: 18px;
+
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+        }
+
+        .card h2 {
+            color: #667eea;
+            margin-top: 0;
+            margin-bottom: 25px;
+        }
+
+        /* Form */
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 22px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #444;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 13px;
+
+            border: 1px solid #ddd;
+            border-radius: 8px;
+
+            font-size: 15px;
+            outline: none;
+        }
+
+        .form-group input:focus {
+            border-color: #667eea;
+
+            box-shadow:
+                0 0 5px rgba(102,126,234,0.3);
+        }
+
+        .hint {
+            font-size: 12px;
+            color: #888;
+            margin-top: 5px;
+        }
+
+        /* Button */
+
+        .predict-button {
+            width: 100%;
+            margin-top: 30px;
+
+            padding: 15px;
+
+            border: none;
+            border-radius: 9px;
+
+            background: linear-gradient(
+                135deg,
+                #667eea,
+                #764ba2
+            );
+
+            color: white;
+
+            font-size: 17px;
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+        .predict-button:hover {
+            opacity: 0.9;
+        }
+
+        /* Prediction result */
+
+        .result {
+            margin-top: 30px;
+            padding: 25px;
+
+            background: linear-gradient(
+                135deg,
+                #667eea,
+                #764ba2
+            );
+
+            color: white;
+
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .result h2 {
+            color: white;
+            margin-bottom: 10px;
+        }
+
+        .score {
+            font-size: 45px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .result p {
+            margin: 5px;
+            opacity: 0.9;
+        }
+
+        /* Bottom links */
+
+        .links {
+            text-align: center;
+            margin-top: 25px;
+        }
+
+        .links a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 0 10px;
+        }
+
+        /* Mobile */
+
+        @media (max-width: 700px) {
+
+            .navbar {
+                padding: 15px 20px;
+            }
+
+            .navbar h2 {
+                font-size: 17px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .card {
+                padding: 25px;
+            }
+
+            .heading h1 {
+                font-size: 27px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+
+<!-- Navbar -->
+
+<div class="navbar">
+
+    <h2>
+        🎓 Student Performance Prediction
+    </h2>
+
+    <div class="nav-buttons">
+
+        <a
+            class="nav-button"
+            href="/dashboard"
+        >
+            Dashboard
+        </a>
+
+        <a
+            class="nav-button"
+            href="/history"
+        >
+            History
+        </a>
+
+        <a
+            class="nav-button"
+            href="/logout"
+        >
+            Logout
+        </a>
+
+    </div>
+
+</div>
+
+
+<!-- Main -->
+
+<div class="container">
+
+
+    <div class="heading">
+
+        <h1>
+            Predict Student Performance
+        </h1>
+
+        <p>
+            Enter the student's academic and lifestyle details
+            to predict the final score using Machine Learning.
+        </p>
+
+    </div>
+
+
+    <div class="card">
+
+        <h2>
+            📊 Student Details
+        </h2>
+
+
+        <form
+            method="POST"
+            action="/predict"
+        >
+
+
+            <div class="form-grid">
+
+
+                <!-- Study Hours -->
+
+                <div class="form-group">
+
+                    <label>
+                        📚 Study Hours
+                    </label>
+
+                    <input
+                        type="number"
+                        name="study_hours"
+                        step="0.1"
+                        min="0"
+                        max="24"
+                        placeholder="Example: 6"
+                        required
+                    >
+
+                    <div class="hint">
+                        Average study hours per day
+                    </div>
+
+                </div>
+
+
+                <!-- Attendance -->
+
+                <div class="form-group">
+
+                    <label>
+                        🏫 Attendance (%)
+                    </label>
+
+                    <input
+                        type="number"
+                        name="attendance"
+                        step="0.1"
+                        min="0"
+                        max="100"
+                        placeholder="Example: 80"
+                        required
+                    >
+
+                    <div class="hint">
+                        Attendance percentage
+                    </div>
+
+                </div>
+
+
+                <!-- Assignment -->
+
+                <div class="form-group">
+
+                    <label>
+                        📝 Assignment Score
+                    </label>
+
+                    <input
+                        type="number"
+                        name="assignment_score"
+                        step="0.1"
+                        min="0"
+                        max="100"
+                        placeholder="Example: 75"
+                        required
+                    >
+
+                    <div class="hint">
+                        Assignment score out of 100
+                    </div>
+
+                </div>
+
+
+                <!-- Midterm -->
+
+                <div class="form-group">
+
+                    <label>
+                        📖 Midterm Score
+                    </label>
+
+                    <input
+                        type="number"
+                        name="midterm_score"
+                        step="0.1"
+                        min="0"
+                        max="100"
+                        placeholder="Example: 80"
+                        required
+                    >
+
+                    <div class="hint">
+                        Midterm examination score
+                    </div>
+
+                </div>
+
+
+                <!-- Sleep -->
+
+                <div class="form-group">
+
+                    <label>
+                        😴 Sleep Hours
+                    </label>
+
+                    <input
+                        type="number"
+                        name="sleep_hours"
+                        step="0.1"
+                        min="0"
+                        max="24"
+                        placeholder="Example: 8"
+                        required
+                    >
+
+                    <div class="hint">
+                        Average sleep hours per day
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="predict-button"
+            >
+                🤖 Predict Final Score
+            </button>
+
+
+        </form>
+
+
+        <!-- Result -->
+
+        {% if prediction is defined %}
+
+        <div class="result">
+
+            <h2>
+                🎯 Prediction Result
+            </h2>
+
+            <div class="score">
+                {{ prediction }}
+            </div>
+
+            <p>
+                Predicted Final Score
+            </p>
+
+        </div>
+
+        {% endif %}
+
+
+    </div>
+
+
+    <div class="links">
+
+        <a href="/dashboard">
+            ← Dashboard
+        </a>
+
+        <a href="/history">
+            View Prediction History
+        </a>
+
+    </div>
+
+
+</div>
+
+</body>
+</html>

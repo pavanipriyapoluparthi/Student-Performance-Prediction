@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Dashboard - Student Performance Prediction</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f6ff;
+            color: #333;
+        }
+
+        /* Navbar */
+
+        .navbar {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 18px 45px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+        }
+
+        .navbar h2 {
+            margin: 0;
+            font-size: 22px;
+        }
+
+        .logout {
+            background: white;
+            color: #667eea;
+            padding: 9px 18px;
+            border-radius: 7px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .logout:hover {
+            background: #f0f0ff;
+        }
+
+        /* Main */
+
+        .container {
+            max-width: 1050px;
+            margin: 45px auto;
+            padding: 20px;
+        }
+
+        .welcome {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .welcome h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .welcome h1 span {
+            color: #667eea;
+        }
+
+        .welcome p {
+            color: #777;
+            font-size: 16px;
+        }
+
+        /* Cards */
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+        }
+
+        .card {
+            background: white;
+            padding: 35px;
+            border-radius: 18px;
+
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+
+            text-align: center;
+
+            transition: transform 0.2s,
+                        box-shadow 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+
+            box-shadow:
+                0 12px 30px rgba(0,0,0,0.12);
+        }
+
+        .icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .card h2 {
+            color: #667eea;
+            margin-bottom: 12px;
+        }
+
+        .card p {
+            color: #777;
+            line-height: 1.6;
+            min-height: 50px;
+        }
+
+        .button {
+            display: inline-block;
+
+            margin-top: 18px;
+
+            padding: 12px 25px;
+
+            background: linear-gradient(
+                135deg,
+                #667eea,
+                #764ba2
+            );
+
+            color: white;
+
+            text-decoration: none;
+
+            border-radius: 8px;
+
+            font-weight: bold;
+        }
+
+        .button:hover {
+            opacity: 0.9;
+        }
+
+        /* Info section */
+
+        .info {
+            background: white;
+            margin-top: 30px;
+            padding: 25px;
+            border-radius: 15px;
+
+            box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+
+            text-align: center;
+        }
+
+        .info h3 {
+            color: #667eea;
+        }
+
+        .info p {
+            color: #777;
+            line-height: 1.6;
+        }
+
+        /* Mobile */
+
+        @media (max-width: 700px) {
+
+            .navbar {
+                padding: 15px 20px;
+            }
+
+            .navbar h2 {
+                font-size: 17px;
+            }
+
+            .container {
+                margin: 25px auto;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .welcome h1 {
+                font-size: 28px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- Navbar -->
+
+<div class="navbar">
+
+    <h2>
+        🎓 Student Performance Prediction
+    </h2>
+
+    <a
+        class="logout"
+        href="/logout"
+    >
+        Logout
+    </a>
+
+</div>
+
+
+<!-- Main Content -->
+
+<div class="container">
+
+
+    <!-- Welcome -->
+
+    <div class="welcome">
+
+        <h1>
+            Welcome, <span>{{ username }}</span>! 👋
+        </h1>
+
+        <p>
+            Analyze and predict student academic performance
+            using Machine Learning.
+        </p>
+
+    </div>
+
+
+    <!-- Cards -->
+
+    <div class="cards">
+
+
+        <!-- Prediction -->
+
+        <div class="card">
+
+            <div class="icon">
+                🤖
+            </div>
+
+            <h2>
+                Make Prediction
+            </h2>
+
+            <p>
+                Enter academic and lifestyle information
+                to predict the student's final score.
+            </p>
+
+            <a
+                class="button"
+                href="/predict-page"
+            >
+                Start Prediction
+            </a>
+
+        </div>
+
+
+        <!-- History -->
+
+        <div class="card">
+
+            <div class="icon">
+                📈
+            </div>
+
+            <h2>
+                Prediction History
+            </h2>
+
+            <p>
+                View your previous student performance
+                predictions and predicted scores.
+            </p>
+
+            <a
+                class="button"
+                href="/history"
+            >
+                View History
+            </a>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- Information -->
+
+
+</div>
+
+
+</body>
+
+</html>
